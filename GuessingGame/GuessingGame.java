@@ -49,6 +49,8 @@ public class GuessingGame extends Application {
       reset.setFont(Font.font("League Spartan",20));
       reset.setTextFill(Color.web("#381E22"));
       reset.setStyle("-fx-background-color: #F9EAED"); 
+      
+      reset.setOnAction(new ResetBoard());
 
       
       grid = new GridPane();
@@ -86,12 +88,14 @@ public class GuessingGame extends Application {
    }
    
              
+            
       Button makeBlank(){
 
          Button newButton =  new Button(""); 
       
          newButton.setPrefWidth(150);
          newButton.setPrefHeight(150);
+         
 
          return(newButton); 
    }
@@ -117,4 +121,22 @@ public class GuessingGame extends Application {
             }
       return(imagesGrid);
 
-      }}
+      }
+
+   class ResetBoard implements EventHandler<ActionEvent> {      
+      @Override
+      
+      public void handle(ActionEvent event) {
+
+      for (int r=0;r<4;r++){ 
+         for (int c=0;c<4;c++){
+            allBlanks[r][c] = makeBlank();
+            grid.add(allBlanks[r][c],c,r);
+            allBlanks[r][c].setStyle("-fx-background-color: #FDF5F6;-fx-background-radius: 0");
+         }
+      }}}
+      
+
+}
+
+
