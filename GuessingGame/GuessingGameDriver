@@ -1,0 +1,10 @@
+import java.util.*;
+
+class GuessingGameDriver{
+   public static void main(String argv[]){
+      Scanner sc = new Scanner(System.in); 
+   
+      GuessingGameRes gg = new GuessingGameRes(); 
+ 
+   } // main
+} // class
