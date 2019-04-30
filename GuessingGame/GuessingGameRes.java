@@ -9,7 +9,7 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    private int matches = 0; //(for A code)how many completed games the player(s) have played 
    private int [][] board = new int [4][4]; 
    private boolean [][] faceup = new boolean[4][4];//a seperate list that keeps the correct guesses 
-   private int rows ; 
+   private int rows; 
    private int col; 
    
    
@@ -25,11 +25,12 @@ class GuessingGameRes implements Game { //the "back-end" of the program
             faceup[r][c] = false; }
          }
       cards(board); 
-      showBoard(faceup,board); 
+      makeBoard(faceup,board); 
    } 
    
-   public void showBoard(boolean [][]faceup, int [][] board){
-         for(int r = 0; r<4; r++){
+   public void makeBoard(boolean [][]faceup, int [][] board){
+         for(int r = 0; r<
+         4; r++){
          for(int c = 0; c<4; c++){ 
             if(faceup[r][c]== true){
                 System.out.print(board[r][c]+" ");}
@@ -43,11 +44,11 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    
    public int[][] cards(int [][]board){
       int [] cardvalue = {1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9}; 
-      int t = 0; 
+      int i = 0; 
       for(int r = 0; r<4; r++){
          for(int c = 0; c<4; c++){
-            board[r][c]= cardvalue[t]; 
-            t++;}
+            board[r][c]= cardvalue[i]; 
+            i++;}
             }
           return(board); 
         }//cards 
@@ -86,9 +87,14 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    
    
    public void takeTurn(int choice[]){
-      turnCnt++; 
-   }//stub of take turn 
+      turnCnt++;
+      } 
       
+      
+  
+ 
+      
+  
    public String gameOverStatus(){
       String status = ""; 
       if (isWinner())
