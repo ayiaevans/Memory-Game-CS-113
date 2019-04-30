@@ -175,7 +175,7 @@ public class GuessingGame extends Application {
          for (int c=0;c<4;c++){
             allBlanks[r][c] = makeBlank();
             grid.add(allBlanks[r][c],c,r);
-            allBlanks[r][c].setStyle("-fx-background-color: #FDF5F6;-fx-background-radius: 0");
+            allBlanks[r][c].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
             allBlanks[r][c].setOnAction(new ButtonClickHandler());
          }
       }}}
