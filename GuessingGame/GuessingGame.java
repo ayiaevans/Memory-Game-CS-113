@@ -34,6 +34,8 @@ public class GuessingGame extends Application {
    Label p1Score = new Label("   Player 1 : 0");
    Label p2Score = new Label("Player 2: 0   ");
    Label turnCnt = new Label("Turn Count: 0");
+   GuessingGameRes gg = new GuessingGameRes(); 
+   Label status = new Label(gg.gameOverStatus());
    //if you do small, medium, and large (for A-Code), you can't instantiate arrays up here â€“ create them once sizechoice is determined
 
    
@@ -159,9 +161,7 @@ public class GuessingGame extends Application {
       
       for(int j = 0;j<16;j++){
          int num = iHateJava.get(j);
-         shuffled[j] = images[num]; 
-      
-         System.out.print(shuffled[j]); }
+         shuffled[j] = images[num];  }
 
       return(shuffled);
       }     
@@ -175,7 +175,7 @@ public class GuessingGame extends Application {
          for (int c=0;c<4;c++){
             allBlanks[r][c] = makeBlank();
             grid.add(allBlanks[r][c],c,r);
-            allBlanks[r][c].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
+            allBlanks[r][c].setStyle("-fx-background-color: #FDF5F6;-fx-background-radius: 0");
             allBlanks[r][c].setOnAction(new ButtonClickHandler());
          }
       }}}
@@ -185,7 +185,7 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
    {
       @Override
       public void handle(ActionEvent event)
-      {
+      {status.setText(gg.gameOverStatus());
       for(int r=0;r<4;r++){
          for(int c=0;c<4;c++){
             if(event.getSource().equals(allBlanks[r][c])){
