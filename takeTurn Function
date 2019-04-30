@@ -1,0 +1,21 @@
+   public void takeTurn(int choice[0]){
+      turnCnt++;
+      if(turnCnt ==1){ 
+         firstGuess = choice[0]; 
+         msg = "Time for your second guess!";
+         fixShownBoard(firstGuess);
+         if(turnCnt ==2){
+            secondGuess = choice[1];
+         msg = "You completed your second guess!";
+         if(firstGuess == secondGuess){
+            isWinner = true;
+            msg = "You win!";  
+         }
+         else{
+            isWinner = false; 
+            msg = "That was incorrect"+ CheckAnswer;
+         } 
+      }
+     } 
+         
+      
