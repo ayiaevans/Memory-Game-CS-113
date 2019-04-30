@@ -29,9 +29,10 @@ public class GuessingGame extends Application {
    Label header = new Label("Guessing Game");
    int turnCnt;
    ImageView[] images = new ImageView[16];
+   ImageView[] shuffled = new ImageView[16];
    ImageView[][] imagesGrid = new ImageView[4][4];
    int sizeChoice = 4;
-   //if you do small, medium, and large (for A-Code), you can't instantiate arrays up here – create them once sizechoice is determined
+   //if you do small, medium, and large (for A-Code), you can't instantiate arrays up here â€“ create them once sizechoice is determined
 
    
    
@@ -42,6 +43,7 @@ public class GuessingGame extends Application {
    
    @Override
    public void start(Stage stage){
+      imagesGrid=images();
       
       header.setFont(Font.font("League Spartan",34));
       header.setTextFill(Color.web("#381E22"));
@@ -71,6 +73,7 @@ public class GuessingGame extends Application {
             allBlanks[r][c] = makeBlank();
             grid.add(allBlanks[r][c],c,r);
             allBlanks[r][c].setStyle("-fx-background-color: #FDF5F6;-fx-background-radius: 0");
+            allBlanks[r][c].setOnAction(new ButtonClickHandler());
          }
       }
       
@@ -84,6 +87,7 @@ public class GuessingGame extends Application {
       stage.setScene(scene);
       stage.setTitle("Guessing Game"); 
       stage.show(); 
+      
 
    }
    
@@ -103,25 +107,50 @@ public class GuessingGame extends Application {
       ImageView[][] images(){
          
          int num = 0;
-         for (int p=1;p<2;p++){
-            for (int i=1;i<8;i++){
-               images[i-1] = new ImageView(i+".jpg");
+           for (int i=1;i<9;i++){
+               images[i-1] = new ImageView(i+".jpeg");
+               images[i-1].setFitWidth(130); 
+               images[i-1].setFitHeight(130);
                }
-            }
-         //***for i<8:  make the 8 a variable that can change based on the size of the grid (for A-Code) –– sizechoice!!***
+               
+           for (int i=1;i<9;i++){
+               images[i+7] = new ImageView(i+".jpeg");
+               images[i+7] .setFitWidth(130); 
+               images[i+7] .setFitHeight(130);
+               }
+
+           shuffle();
+         //***for i<8:  make the 8 a variable that can change based on the size of the grid (for A-Code) â€“â€“ sizechoice!!***
             
 
          for (int r=0;r<4;r++){ 
             for (int c=0;c<4;c++){
-            imagesGrid[r][c] = images[num];
-
-            num = num + 1;
-            }
+            imagesGrid[r][c] = shuffled[num];
+            num = num + 1;}
          
             }
       return(imagesGrid);
 
       }
+      
+   ImageView[] shuffle(){
+   
+      ArrayList<Integer> iHateJava = new ArrayList<Integer>();
+      
+      for(int i = 0;i<16;i++){
+         iHateJava.add(new Integer(i)); }
+         
+      Collections.shuffle(iHateJava);
+      //System.out.println(iHateJava);
+      
+      for(int j = 0;j<16;j++){
+         int num = iHateJava.get(j);
+         shuffled[j] = images[num]; 
+      
+         System.out.print(shuffled[j]); }
+
+      return(shuffled);
+      }     
 
    class ResetBoard implements EventHandler<ActionEvent> {      
       @Override
@@ -136,7 +165,21 @@ public class GuessingGame extends Application {
          }
       }}}
       
-
-}
-
-
+      
+class ButtonClickHandler implements EventHandler<ActionEvent>
+   {
+      @Override
+      public void handle(ActionEvent event)
+      {
+      for(int r=0;r<4;r++){
+         for(int c=0;c<4;c++){
+            if(event.getSource().equals(allBlanks[r][c])){
+                  allBlanks[r][c]= new Button("",imagesGrid[r][c]);
+                  grid.add(allBlanks[r][c],c,r);}}
+                  }
+                  
+                  }
+                  
+                  
+                  }
+        }
