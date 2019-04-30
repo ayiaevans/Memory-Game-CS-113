@@ -9,8 +9,8 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    private int matches = 0; //(for A code)how many completed games the player(s) have played 
    private int [][] board = new int [4][4]; 
    private boolean [][] faceup = new boolean[4][4];//a seperate list that keeps the correct guesses 
-   private int rows = 4; 
-   private int col = 4; 
+   private int rows ; 
+   private int col; 
    
    
    GuessingGameRes(){
