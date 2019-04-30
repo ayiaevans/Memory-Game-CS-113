@@ -27,11 +27,13 @@ public class GuessingGame extends Application {
    Button reset = new Button("Click to Reset Board");  
    Button[][] allBlanks = new Button[4][4]; //{row1,row2,row3};
    Label header = new Label("Guessing Game");
-   int turnCnt;
    ImageView[] images = new ImageView[16];
    ImageView[] shuffled = new ImageView[16];
    ImageView[][] imagesGrid = new ImageView[4][4];
    int sizeChoice = 4;
+   Label p1Score = new Label("   Player 1 : 0");
+   Label p2Score = new Label("Player 2: 0   ");
+   Label turnCnt = new Label("Turn Count: 0");
    //if you do small, medium, and large (for A-Code), you can't instantiate arrays up here â€“ create them once sizechoice is determined
 
    
@@ -46,15 +48,23 @@ public class GuessingGame extends Application {
       imagesGrid=images();
       
       header.setFont(Font.font("League Spartan",34));
-      header.setTextFill(Color.web("#381E22"));
+      header.setTextFill(Color.web("#1E2738"));
       
       reset.setFont(Font.font("League Spartan",20));
       reset.setTextFill(Color.web("#381E22"));
-      reset.setStyle("-fx-background-color: #F9EAED"); 
+      reset.setStyle("-fx-background-color: #BECADD"); 
       
       reset.setOnAction(new ResetBoard());
 
+      p1Score.setFont(Font.font("League Spartan",20));
+      p1Score.setTextFill(Color.web("#FFFFFF"));
       
+      p2Score.setFont(Font.font("League Spartan",20));
+      p2Score.setTextFill(Color.web("#FFFFFF"));
+
+      turnCnt.setFont(Font.font("League Spartan",15));
+      turnCnt.setTextFill(Color.web("#FFFFFF"));
+
       grid = new GridPane();
       grid.setMinWidth(638);
       grid.setMaxWidth(638); 
@@ -63,7 +73,7 @@ public class GuessingGame extends Application {
       
       grid.setVgap(8); 
       grid.setHgap(8);
-      grid.setStyle("-fx-background-color: #381E22"); 
+      grid.setStyle("-fx-background-color: #1E2738"); 
       grid.setAlignment(Pos.CENTER); 
       
       
@@ -72,18 +82,22 @@ public class GuessingGame extends Application {
          for (int c=0;c<4;c++){
             allBlanks[r][c] = makeBlank();
             grid.add(allBlanks[r][c],c,r);
-            allBlanks[r][c].setStyle("-fx-background-color: #FDF5F6;-fx-background-radius: 0");
+            allBlanks[r][c].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
             allBlanks[r][c].setOnAction(new ButtonClickHandler());
          }
       }
       
       
-      
-      VBox vbox = new VBox(header,grid,reset);
+      VBox vbox = new VBox(header,grid,reset,turnCnt);
       vbox.setAlignment(Pos.CENTER);
-      vbox.setStyle("-fx-background-color: #F9EAED");
+      vbox.setStyle("-fx-background-color: #BECADD");
       
-      Scene scene = new Scene(vbox,1200,1200); 
+      HBox hbox = new HBox(p1Score,vbox,p2Score);
+      hbox.setStyle("-fx-background-color: #BECADD");
+      vbox.setAlignment(Pos.CENTER);
+
+      
+      Scene scene = new Scene(hbox); 
       stage.setScene(scene);
       stage.setTitle("Guessing Game"); 
       stage.show(); 
