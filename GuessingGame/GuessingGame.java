@@ -36,6 +36,8 @@ public class GuessingGame extends Application {
    Label turnCnt = new Label("Turn Count: 0");
    GuessingGameRes gg = new GuessingGameRes(); 
    Label status = new Label(gg.gameOverStatus());
+   int turn=0;
+   int [] guess = new int[4];
    //if you do small, medium, and large (for A-Code), you can't instantiate arrays up here â€“ create them once sizechoice is determined
 
    
@@ -175,7 +177,7 @@ public class GuessingGame extends Application {
          for (int c=0;c<4;c++){
             allBlanks[r][c] = makeBlank();
             grid.add(allBlanks[r][c],c,r);
-            allBlanks[r][c].setStyle("-fx-background-color: #FDF5F6;-fx-background-radius: 0");
+            allBlanks[r][c].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
             allBlanks[r][c].setOnAction(new ButtonClickHandler());
          }
       }}}
@@ -185,16 +187,33 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
    {
       @Override
       public void handle(ActionEvent event)
-      {status.setText(gg.gameOverStatus());
-      for(int r=0;r<4;r++){
-         for(int c=0;c<4;c++){
-            if(event.getSource().equals(allBlanks[r][c])){
+      {
+      //status.setText(gg.gameOverStatus());
+         for(int r=0;r<4;r++){
+            for(int c=0;c<4;c++){
+               if(event.getSource().equals(allBlanks[r][c])){
                   allBlanks[r][c]= new Button("",imagesGrid[r][c]);
-                  grid.add(allBlanks[r][c],c,r);}}
-                  }
+                  grid.add(allBlanks[r][c],c,r);
+               if (turn==1){
+                  guess[0]=r;
+                  guess[1]=c;}
+               if (turn==2){
+                  guess[2]=r;
+                  guess[3]=c;
+                  for(int i=0;i<4;i++){
+                     System.out.println(guess[i]);}
+                  turn=0;}
+               turn++;
+               turnCnt.setText("Turn Count: "+turn);}
+               
+          
+
+                 }}
+                  
                   
                   }
                   
+                  }
+                  
                   
                   }
-        }
