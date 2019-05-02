@@ -1,4 +1,4 @@
-import java.util.*;
+iimport java.util.*;
 
 
 class GuessingGameRes implements Game { //the "back-end" of the program 
@@ -22,13 +22,13 @@ class GuessingGameRes implements Game { //the "back-end" of the program
       isWinner = false; 
      for(int r = 0; r<4; r++){
          for(int c = 0; c<4; c++){
-            faceup[r][c] = false; }
+            faceup[r][c] =false; }
          }
       cards(board); 
-      makeBoard(faceup,board); 
+      makeBoard(); 
    } 
    
-   public void makeBoard(boolean [][]faceup, int [][] board){
+   public void makeBoard(){ 
          for(int r = 0; r<
          4; r++){
          for(int c = 0; c<4; c++){ 
@@ -38,12 +38,12 @@ class GuessingGameRes implements Game { //the "back-end" of the program
                System.out.print("* ");}
             
          } //puts a character star in each slot
-         System.out.println();
+         System.out.println(); 
       }//for loop 
    }//makeBoard 
    
    public int[][] cards(int [][]board){
-      int [] cardvalue = {1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9}; 
+      int [] cardvalue = {1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8}; 
       int i = 0; 
       for(int r = 0; r<4; r++){
          for(int c = 0; c<4; c++){
@@ -73,35 +73,66 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    } 
       
    public boolean isWinner(){
+   int match = 0; 
+   for(int r = 0; r<4; r++){
+      for(int c = 0; c<4; c++){
+         if (faceup[r][c]==true){
+            match++;
+               if(match==16){
+                  isWinner=true;}}
+                  
+               
+         else{
+            isWinner=false;}
+            }
+          }
+            
       return(isWinner); 
    } 
       
-  /* public String toString(){
-   String words = ""; 
-   return(words); 
-   }// a basic toString */
+ 
    
-   public boolean isValidInput(int [] x){
-      return(true);
+   public boolean isValidInput(int [] c){
+      boolean input = false; 
+      for(int i=0; i<4; i++){
+         if(c[i]<4){
+            input = true; }
+         else{
+            System.out.println("Invalid input. Try again."); 
+            input = false; }
+         }
+         return(input); 
    }
    
    
-   public void takeTurn(int choice[]){
+   public void takeTurn(int c[]){
       turnCnt++;
+      
+      if(board[c[0]][c[1]]==board[c[2]][c[3]]){
+         System.out.println("Correct match!"); 
+         faceup[c[0]][c[1]]=true; 
+         faceup[c[2]][c[3]]=true; 
+         }
+       else{
+       System.out.println("Not a match. Try again."); 
+       }
+      makeBoard(); 
+      isWinner();
+      System.out.println("Game Status:"+gameOverStatus()+"\n");
       } 
       
       
   
- 
       
   
    public String gameOverStatus(){
       String status = ""; 
-      if (isWinner())
+      if (isWinner()){
          status = "Winner"; 
+         }
       
-      else
-         status = "In progress"; 
+      else{
+         status = "In progress"; }
       return(status); 
    } //prints out the status of the game 
       
