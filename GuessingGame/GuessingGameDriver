@@ -5,6 +5,37 @@ class GuessingGameDriver{
       Scanner sc = new Scanner(System.in); 
    
       GuessingGameRes gg = new GuessingGameRes(); 
- 
+      int turn = gg.getTurnCnt(); 
+      int [] c =new int [4] ; 
+      
+      
+      do{  // a do-while that asks user to input the row and colomn 
+      System.out.println("Enter row:"); 
+      int  row1 = sc.nextInt(); 
+      c[0] = row1; 
+      
+      System.out.println("Enter colomn:"); 
+      int col1 = sc.nextInt();
+      c[1]=col1;
+      
+      System.out.println("Enter row:"); 
+      int row2 = sc.nextInt(); 
+      c[2]= row2; 
+      
+      System.out.println("Enter coloumn"); 
+      int col2 = sc.nextInt();  
+      c[3] = col2; 
+      
+      if(gg.isValidInput(c)==true){
+      
+      
+       gg.takeTurn(c); 
+       turn++; }
+      }while(turn<16 && !gg.isWinner());
+      
+      
+      
+      
+      
    } // main
 } // class
