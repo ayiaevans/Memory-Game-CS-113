@@ -189,6 +189,17 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
       public void handle(ActionEvent event)
       {
       //status.setText(gg.gameOverStatus());
+      if(turn==3){
+         allBlanks[guess[0]][ guess[1]] = makeBlank();
+         grid.add(allBlanks[guess[0]][ guess[1]],guess[1],guess[0]);
+         allBlanks[guess[0]][ guess[1]].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
+         allBlanks[guess[0]][ guess[1]].setOnAction(new ButtonClickHandler());
+         allBlanks[guess[2]][ guess[3]] = makeBlank();
+         grid.add(allBlanks[guess[2]][ guess[3]],guess[3],guess[2]);
+         allBlanks[guess[2]][ guess[3]].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
+         allBlanks[guess[2]][ guess[3]].setOnAction(new ButtonClickHandler());
+         turn=0;}
+        else{
          for(int r=0;r<4;r++){
             for(int c=0;c<4;c++){
                if(event.getSource().equals(allBlanks[r][c])){
@@ -199,21 +210,13 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
                   guess[1]=c;}
                if (turn==2){
                   guess[2]=r;
-                  guess[3]=c;
-                  for(int i=0;i<4;i++){
-                     System.out.println(guess[i]);}
-                  turn=0;}
+                  guess[3]=c;}}}}}
+                  
                turn++;
                turnCnt.setText("Turn Count: "+turn);}
-               
-          
-
-                 }}
                   
                   
                   }
                   
                   }
-                  
-                  
-                  }
+                 
