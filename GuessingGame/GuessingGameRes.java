@@ -119,11 +119,11 @@ class GuessingGameRes implements Game { //the "back-end" of the program
       System.out.println("Game Status:"+gameOverStatus()+"\n");
       } 
       
-   public boolean isMatch(int c[]){
+   public boolean isMatch(int [] choice){
       boolean match = false; 
-      if(board[c[0]][c[1]]==board[c[2]][c[3]]){ 
-         faceup[c[0]][c[1]]=true; 
-         faceup[c[2]][c[3]]=true; 
+      if(board[choice[0]][choice[1]]==board[choice[2]][choice[3]]){ 
+         faceup[choice[0]][choice[1]]=true; 
+         faceup[choice[2]][choice[3]]=true; 
          match = true; 
          }
        else{ 
