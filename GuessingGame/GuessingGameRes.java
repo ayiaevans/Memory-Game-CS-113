@@ -108,7 +108,7 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    
    public void takeTurn(int c[]){
       turnCnt++;
-      if(isMatch(c)==true){
+      if(isMatch()==true){
          System.out.println("Correct match!"); 
          }
        else{
@@ -119,7 +119,7 @@ class GuessingGameRes implements Game { //the "back-end" of the program
       System.out.println("Game Status:"+gameOverStatus()+"\n");
       } 
       
-   public boolean isMatch(int [] choice){
+   public boolean isMatch(){
       boolean match = false; 
       if(board[choice[0]][choice[1]]==board[choice[2]][choice[3]]){ 
          faceup[choice[0]][choice[1]]=true; 
