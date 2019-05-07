@@ -12,6 +12,8 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    private int rows; 
    private int col; 
    int [] choice= {4}; 
+   int [] cardvalue = {};
+   
    
    GuessingGameRes(){
       setUp();  
@@ -43,7 +45,6 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    }//makeBoard 
    
    public int[][] cards(int [][]board){
-      int [] cardvalue = {1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8}; 
       int i = 0; 
       for(int r = 0; r<4; r++){
          for(int c = 0; c<4; c++){
@@ -52,6 +53,11 @@ class GuessingGameRes implements Game { //the "back-end" of the program
             }
           return(board); 
         }//cards 
+        
+   public int [] setCard(int [] s){
+      cardvalue = s; 
+      return(cardvalue);
+        }//sets the numbers 
    
   /* public int getSize(String size){
       int s = 2;
