@@ -13,7 +13,6 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    private int col; 
    int [] choice= {4}; 
    
-   
    GuessingGameRes(){
       setUp();  
    } //constructor 
@@ -109,11 +108,8 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    
    public void takeTurn(int c[]){
       turnCnt++;
-      
-      if(board[c[0]][c[1]]==board[c[2]][c[3]]){
+      if(isMatch(c)==true){
          System.out.println("Correct match!"); 
-         faceup[c[0]][c[1]]=true; 
-         faceup[c[2]][c[3]]=true; 
          }
        else{
        System.out.println("Not a match. Try again."); 
@@ -122,6 +118,20 @@ class GuessingGameRes implements Game { //the "back-end" of the program
       isWinner();
       System.out.println("Game Status:"+gameOverStatus()+"\n");
       } 
+      
+   public boolean isMatch(int c[]){
+      boolean match = false; 
+      if(board[c[0]][c[1]]==board[c[2]][c[3]]){ 
+         faceup[c[0]][c[1]]=true; 
+         faceup[c[2]][c[3]]=true; 
+         match = true; 
+         }
+       else{ 
+       match = false; 
+       }
+      return(match); 
+      } 
+      
       
    public int [] setChoice(int [] c){
        choice = c; 
