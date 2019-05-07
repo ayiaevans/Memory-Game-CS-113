@@ -151,9 +151,11 @@ public class GuessingGame extends Application {
 
       }
       
-   ImageView[] shuffle(){
+      ImageView[] shuffle(){
    
       ArrayList<Integer> iHateJava = new ArrayList<Integer>();
+      
+      int[] random = new int[16];
       
       for(int i = 0;i<16;i++){
          iHateJava.add(new Integer(i)); }
@@ -163,7 +165,15 @@ public class GuessingGame extends Application {
       
       for(int j = 0;j<16;j++){
          int num = iHateJava.get(j);
-         shuffled[j] = images[num];  }
+         shuffled[j] = images[num]; 
+      
+         System.out.print(shuffled[j]); }
+         
+      for(int x = 0;x<16;x++){
+         int num = iHateJava.get(x);
+         random[x] = num; }
+         
+      gg.setCard(random);   
 
       return(shuffled);
       }     
