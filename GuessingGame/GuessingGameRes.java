@@ -11,6 +11,7 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    private boolean [][] faceup = new boolean[4][4];//a seperate list that keeps the correct guesses 
    private int rows; 
    private int col; 
+   int [] choice= {4}; 
    
    
    GuessingGameRes(){
@@ -63,6 +64,7 @@ class GuessingGameRes implements Game { //the "back-end" of the program
          s = 6; 
       return (s); 
      }//gets the size of the board */ 
+     
    
    public int getTurnCnt(){
       return(turnCnt);  //returns what turn the player is on 
@@ -121,7 +123,10 @@ class GuessingGameRes implements Game { //the "back-end" of the program
       System.out.println("Game Status:"+gameOverStatus()+"\n");
       } 
       
-      
+   public int [] setChoice(int [] c){
+       choice = c; 
+       return choice; 
+       }//set choice 
   
       
   
