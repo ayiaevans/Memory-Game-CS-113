@@ -48,11 +48,15 @@ class GuessingGameRes implements Game { //the "back-end" of the program
       int i = 0; 
       for(int r = 0; r<4; r++){
          for(int c = 0; c<4; c++){
+            if(cardvalue[i]>8){
+               cardvalue[i]++;
+               cardvalue[i] = cardvalue[i]-8;}
             board[r][c]= cardvalue[i]; 
             i++;}
             }
           return(board); 
         }//cards 
+
         
    public int [] setCard(int [] s){
       cardvalue = s; 
