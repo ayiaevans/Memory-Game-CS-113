@@ -182,6 +182,7 @@ public class GuessingGame extends Application {
       @Override
       
       public void handle(ActionEvent event) {
+      turn=1;
       imagesGrid=images();
       for (int r=0;r<4;r++){ 
          for (int c=0;c<4;c++){
