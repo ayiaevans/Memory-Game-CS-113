@@ -137,13 +137,13 @@ public class GuessingGame extends Application {
                images[i+7] .setFitHeight(130);
                }
 
-           
+           shuffle();
          //***for i<8:  make the 8 a variable that can change based on the size of the grid (for A-Code) â€“â€“ sizechoice!!***
             
 
          for (int r=0;r<4;r++){ 
             for (int c=0;c<4;c++){
-            imagesGrid[r][c] = images[num];
+            imagesGrid[r][c] = shuffled[num];
             num = num + 1;}
          
             }
@@ -151,7 +151,7 @@ public class GuessingGame extends Application {
 
       }
       
-      ImageView[] shuffle(){
+   ImageView[] shuffle(){
    
       ArrayList<Integer> iHateJava = new ArrayList<Integer>();
       
@@ -233,4 +233,3 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
                   }
                   
                   }
-                 
