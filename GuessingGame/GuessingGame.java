@@ -36,7 +36,7 @@ public class GuessingGame extends Application {
    Label turnCnt = new Label("Turn Count: 0");
    GuessingGameRes gg = new GuessingGameRes(); 
    Label status = new Label(gg.gameOverStatus());
-   int turn=0;
+   int turn=1;
    int [] guess = new int[4];
    //if you do small, medium, and large (for A-Code), you can't instantiate arrays up here â€“ create them once sizechoice is determined
 
@@ -137,13 +137,13 @@ public class GuessingGame extends Application {
                images[i+7] .setFitHeight(130);
                }
 
-           shuffle();
+           
          //***for i<8:  make the 8 a variable that can change based on the size of the grid (for A-Code) â€“â€“ sizechoice!!***
             
 
          for (int r=0;r<4;r++){ 
             for (int c=0;c<4;c++){
-            imagesGrid[r][c] = shuffled[num];
+            imagesGrid[r][c] = images[num];
             num = num + 1;}
          
             }
@@ -190,15 +190,19 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
       {
       //status.setText(gg.gameOverStatus());
       if(turn==3){
-         allBlanks[guess[0]][ guess[1]] = makeBlank();
-         grid.add(allBlanks[guess[0]][ guess[1]],guess[1],guess[0]);
-         allBlanks[guess[0]][ guess[1]].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
-         allBlanks[guess[0]][ guess[1]].setOnAction(new ButtonClickHandler());
-         allBlanks[guess[2]][ guess[3]] = makeBlank();
-         grid.add(allBlanks[guess[2]][ guess[3]],guess[3],guess[2]);
-         allBlanks[guess[2]][ guess[3]].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
-         allBlanks[guess[2]][ guess[3]].setOnAction(new ButtonClickHandler());
-         turn=0;}
+         gg.setChoice(guess);
+         if(gg.isMatch()){
+            p1Score.setText("   Player 1 : 1");}
+         else{
+            allBlanks[guess[0]][ guess[1]] = makeBlank();
+            grid.add(allBlanks[guess[0]][ guess[1]],guess[1],guess[0]);
+            allBlanks[guess[0]][ guess[1]].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
+            allBlanks[guess[0]][ guess[1]].setOnAction(new ButtonClickHandler());
+            allBlanks[guess[2]][ guess[3]] = makeBlank();
+            grid.add(allBlanks[guess[2]][ guess[3]],guess[3],guess[2]);
+            allBlanks[guess[2]][ guess[3]].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
+            allBlanks[guess[2]][ guess[3]].setOnAction(new ButtonClickHandler());}
+            turn=0;}
         else{
          for(int r=0;r<4;r++){
             for(int c=0;c<4;c++){
