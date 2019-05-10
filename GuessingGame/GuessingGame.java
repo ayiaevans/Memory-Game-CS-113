@@ -33,8 +33,8 @@ public class GuessingGame extends Application {
    int sizeChoice = 4;
    Label p1Score = new Label("   Player 1 : 0");
    Label p2Score = new Label("Player 2: 0   ");
-   Label turnCnt = new Label("Turn Count: 0");
    GuessingGameRes gg = new GuessingGameRes(); 
+   Label turnCnt = new Label("Player 1 click to chooes a picture");
    Label status = new Label(gg.gameOverStatus());
    int turn=1;
    int [] guess = new int[4];
@@ -60,10 +60,10 @@ public class GuessingGame extends Application {
       
       reset.setOnAction(new ResetBoard());
 
-      p1Score.setFont(Font.font("League Spartan",20));
+      p1Score.setFont(Font.font("League Spartan",30));
       p1Score.setTextFill(Color.web("#FFFFFF"));
       
-      p2Score.setFont(Font.font("League Spartan",20));
+      p2Score.setFont(Font.font("League Spartan",30));
       p2Score.setTextFill(Color.web("#FFFFFF"));
 
       turnCnt.setFont(Font.font("League Spartan",15));
@@ -193,7 +193,6 @@ public class GuessingGame extends Application {
          }
       }}}
       
-      
 class ButtonClickHandler implements EventHandler<ActionEvent>
    {
       @Override
@@ -203,7 +202,7 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
       if(turn==3){
          gg.setChoice(guess);
          if(gg.isMatch()){
-            p1Score.setText("   Player 1 : 1");}
+               p1Score.setText("Player 1 : 1");}
          else{
             allBlanks[guess[0]][ guess[1]] = makeBlank();
             grid.add(allBlanks[guess[0]][ guess[1]],guess[1],guess[0]);
@@ -222,13 +221,15 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
                   grid.add(allBlanks[r][c],c,r);
                if (turn==1){
                   guess[0]=r;
-                  guess[1]=c;}
+                  guess[1]=c;
+                  turnCnt.setText("click to chooes another picture");}
                if (turn==2){
                   guess[2]=r;
-                  guess[3]=c;}}}}}
+                  guess[3]=c;
+                  turnCnt.setText("click twice to chooes another picture");}}}}}
                   
                turn++;
-               turnCnt.setText("Turn Count: "+turn);}
+            }
                   
                   
                   }
