@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class GuessingGameDriver{
+   public static void main(String argv[]){
+      Scanner sc = new Scanner(System.in); 
+      //int [] choice = new int[1]; // just one number: the guess 
+      int choice = 0;
+      int i = 0;
+      int [] c = new int [4];
+      GuessingGameRes gg = new GuessingGameRes(); 
+      gg.setUp();
+      gg.makeBoard();
+      gg.getTurnCnt();
+      gg.getRound();
+      int row;
+      int column;
+      String playAgain;
+      boolean isWinner = gg.isWinner();
+      boolean isValidInput = gg.isValidInput(c);
+      System.out.println(gg.gameOverStatus()); 
+      while (!gg.isWinner() && gg.getTurnCnt()<16){
+         do{
+            System.out.println("Guess a row"); 
+            row = sc.nextInt();
+            row = c[0]; 
+            System.out.println("Guess a column");
+            column = sc.nextInt();
+            column = c[1];
+            System.out.println("Guess another row"); 
+            row = sc.nextInt();
+            row = c[2]; 
+            System.out.println("Guess another column");
+            column = sc.nextInt();
+            column = c[3];
+      System.out.println("Do you want to play another game (y/n)?");
+      playAgain = sc.next();
+     while(playAgain.equalsIgnoreCase("y"));
+         }while(!gg.isValidInput(c));
+            gg.takeTurn(c); 
+           // System.out.println(gg);
+      } 
+   } // main
+} // class
