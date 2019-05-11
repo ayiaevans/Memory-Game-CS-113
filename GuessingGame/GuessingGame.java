@@ -34,9 +34,13 @@ public class GuessingGame extends Application {
    Label p1Score = new Label("   Player 1 : 0");
    Label p2Score = new Label("Player 2: 0   ");
    GuessingGameRes gg = new GuessingGameRes(); 
-   Label turnCnt = new Label("Player 1 click to chooes a picture");
+   Label turnCnt = new Label("Player 2 click to chooes a picture");
    Label status = new Label(gg.gameOverStatus());
    int turn=1;
+   int score1=0;
+   int score2=0;
+   int player=gg.getPlayer();
+   int round=0; 
    int [] guess = new int[4];
    //if you do small, medium, and large (for A-Code), you can't instantiate arrays up here â€“ create them once sizechoice is determined
 
@@ -202,7 +206,14 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
       if(turn==3){
          gg.setChoice(guess);
          if(gg.isMatch()){
-               p1Score.setText("Player 1 : 1");}
+            if(gg.getPlayer()==2){
+               score2=score2+1;
+               gg.setP2(score2);
+               p2Score.setText("Player 2 : "+score2);}
+            else{
+               score1=score1+1;
+               gg.setP1(score1);
+               p1Score.setText("   Player 1 : "+score1);}}
          else{
             allBlanks[guess[0]][ guess[1]] = makeBlank();
             grid.add(allBlanks[guess[0]][ guess[1]],guess[1],guess[0]);
@@ -212,7 +223,9 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
             grid.add(allBlanks[guess[2]][ guess[3]],guess[3],guess[2]);
             allBlanks[guess[2]][ guess[3]].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
             allBlanks[guess[2]][ guess[3]].setOnAction(new ButtonClickHandler());}
-            turn=0;}
+            turn=0;
+            round++;
+            gg.setRound(round);}
         else{
          for(int r=0;r<4;r++){
             for(int c=0;c<4;c++){
@@ -222,11 +235,15 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
                if (turn==1){
                   guess[0]=r;
                   guess[1]=c;
-                  turnCnt.setText("click to chooes another picture");}
+                  turnCnt.setText("Player "+gg.getPlayer()+" click to chooes another picture");}
                if (turn==2){
                   guess[2]=r;
                   guess[3]=c;
-                  turnCnt.setText("click twice to chooes another picture");}}}}}
+                  if (gg.getPlayer()==1){
+                     player=2;}
+                  if(gg.getPlayer()==2){
+                     player=1;}
+                  turnCnt.setText("Player "+player+" click twice to chooes another picture");}}}}}
                   
                turn++;
             }
