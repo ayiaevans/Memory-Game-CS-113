@@ -13,6 +13,9 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    private int col; 
    int [] choice= {4}; 
    int [] cardvalue;
+   int player=1;
+   int p1=0;
+   int p2=0;
    
    
    GuessingGameRes(){
@@ -20,7 +23,10 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    } //constructor 
    
    public void setUp(){
-      turnCnt = 0; 
+      p1=0;
+      p2=0;
+      turnCnt = 0;
+      round = 0;
       isWinner = false; 
      for(int r = 0; r<4; r++){
          for(int c = 0; c<4; c++){
@@ -102,7 +108,30 @@ class GuessingGameRes implements Game { //the "back-end" of the program
             
       return(isWinner); 
    } 
+   
+   public int getPlayer(){
+      if (round%2!=0){
+         player=1;}
+      if (round%2==0){
+         player=2;}
+      return(player);}
+   
+   public int setRound(int x){
+      round=x;
+      return (round);}
+    
+   public int setP1(int x){
+      p1=x;
+      return(p1);}
       
+   public int setP2(int x){
+      p2=x;
+      return(p2);}
+      
+   public int getP1(){
+      return(p1);}
+   public int getP2(){
+      return(p2);}
  
    
    public boolean isValidInput(int [] c){
@@ -121,11 +150,12 @@ class GuessingGameRes implements Game { //the "back-end" of the program
    public void takeTurn(int c[]){
       turnCnt++;
       if(isMatch()==true){
-         System.out.println("Correct match!"); 
+         System.out.println("Correct match!");
          }
        else{
        System.out.println("Not a match. Try again."); 
        }
+      round++;
       makeBoard(); 
       isWinner();
       System.out.println("Game Status:"+gameOverStatus()+"\n");
@@ -137,13 +167,16 @@ class GuessingGameRes implements Game { //the "back-end" of the program
          faceup[choice[0]][choice[1]]=true; 
          faceup[choice[2]][choice[3]]=true; 
          match = true; 
+         if (round%2!=0){
+            p1++;}
+         else{if (round%2==0){
+            p2++;}}
          }
        else{ 
        match = false; 
        }
       return(match); 
       } 
-      
       
    public int [] setChoice(int [] c){
        choice = c; 
