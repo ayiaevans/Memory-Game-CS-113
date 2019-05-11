@@ -91,20 +91,17 @@ class GuessingGameRes implements Game { //the "back-end" of the program
       return(round); //returns the round 
    } 
       
-   public boolean isWinner(){
+    public boolean isWinner(){
    int match = 0; 
    for(int r = 0; r<4; r++){
       for(int c = 0; c<4; c++){
          if (faceup[r][c]==true){
-            match++;
-               if(match==16){
-                  isWinner=true;}}
-                  
-               
+            match++;}}
+          if(match==14){
+            isWinner=true;}     
          else{
             isWinner=false;}
             }
-          }
             
       return(isWinner); 
    } 
