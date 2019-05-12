@@ -1,3 +1,6 @@
+//It runs, but when you click play it just gives a lot of green vomit (one of them's a null exception ¯\_(ツ)_/¯)
+
+
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.application.Application;
