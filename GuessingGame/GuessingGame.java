@@ -186,6 +186,7 @@ public class GuessingGame extends Application {
       @Override
       
       public void handle(ActionEvent event) {
+      gg.setUp();
       turn=1;
       imagesGrid=images();
       for (int r=0;r<4;r++){ 
@@ -202,6 +203,23 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
       @Override
       public void handle(ActionEvent event)
       {
+      if( gg.isWinner()){
+        if(gg.getPlayer()==2){
+               score2=score2+1;
+               gg.setP2(score2);
+               p2Score.setText("Player 2 : "+score2);}
+            else{
+               score1=score1+1;
+               gg.setP1(score1);
+               p1Score.setText("   Player 1 : "+score1);}
+         if(score2==score1){
+             turnCnt.setText("end game, tie");}
+         else{ if(score2<score1){
+             turnCnt.setText("game over, player 1 won");}
+         else{ if(score2>score1){
+             turnCnt.setText("game over, player 2 won");}}
+             }}
+         else{
       //status.setText(gg.gameOverStatus());
       if(turn==3){
          gg.setChoice(guess);
@@ -248,7 +266,7 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
                turn++;
             }
                   
-                  
+             }
                   }
                   
                   }
