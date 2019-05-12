@@ -1,4 +1,3 @@
-//I got new green vomit ¯\_(ツ)_/¯
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.application.Application;
@@ -22,18 +21,18 @@ import javafx.scene.text.TextAlignment;
 import java.util.*;
 
 
-public class GuessingGameSizeChoice extends Application {
+public class GuessingGame extends Application {
    
    
    
    GridPane grid; 
    Button reset = new Button("Click to Reset Board");  
-   Button[][] allBlanks = new Button[4][4]; //{row1,row2,row3};
+   Button[][] allBlanks; //{row1,row2,row3};
    Label header = new Label("Guessing Game");
-   ImageView[] images = new ImageView[16];
-   ImageView[] shuffled = new ImageView[16];
-   ImageView[][] imagesGrid = new ImageView[4][4];
-   int sizeChoice = 4;
+   ImageView[] images;
+   ImageView[] shuffled;
+   ImageView[][] imagesGrid;
+   int sizeChoice = 2;
    Label p1Score = new Label("   Player 1 : 0");
    Label p2Score = new Label("Player 2: 0   ");
    GuessingGameRes gg = new GuessingGameRes(); 
@@ -47,14 +46,7 @@ public class GuessingGameSizeChoice extends Application {
    int [] guess = new int[4];
    private RadioButton [] radioButtons = new RadioButton[3];
    private  ToggleGroup radioGroup;
-   Button play = new Button("Play");
-   VBox promptVBox;
-   VBox radioVBoxWt;
-   VBox mainVBox;
-   Stage stage;
-   VBox changeable;
 
-   
    //if you do small, medium, and large (for A-Code), you can't instantiate arrays up here â€“ create them once sizechoice is determined
 
    
@@ -66,7 +58,8 @@ public class GuessingGameSizeChoice extends Application {
    
    @Override
    public void start(Stage stage){
-   
+      
+      
          radioButtons[0] = new RadioButton("Small (2X2)");
          radioButtons[1] = new RadioButton("Medium (4X4)");
          radioButtons[2] = new RadioButton("Large (6X6)");
@@ -76,57 +69,12 @@ public class GuessingGameSizeChoice extends Application {
          radioGroup = new ToggleGroup();
             for (int i=0;i<3;i++)
          radioButtons[i].setToggleGroup(radioGroup);
-         
-         play.setOnAction (new PlayHandler());
-         
+
+      
+      imagesGrid=images();
+      
       header.setFont(Font.font("League Spartan",34));
       header.setTextFill(Color.web("#1E2738"));
-      
-      play.setFont(Font.font("League Spartan",20));
-      play.setTextFill(Color.web("#381E22"));
-      play.setStyle("-fx-background-color: #BECADD"); 
-      
-        VBox promptVBox = new VBox(10, header);
-        promptVBox.setStyle("-fx-background-color: #BECADD");
-        promptVBox.setAlignment(Pos.CENTER);
-              
-        VBox radioVBoxWt = new VBox(20, radioButtons[0], radioButtons[1],radioButtons[2]);
-        radioVBoxWt.setStyle("-fx-background-color: #BECADD");
-        radioVBoxWt.setAlignment(Pos.CENTER);
-        
-        VBox changeable = new VBox(promptVBox,play);
-        
-        VBox mainVBox = new VBox(promptVBox, radioVBoxWt,play);
-        mainVBox.setStyle("-fx-background-color: #BECADD");
-
-        mainVBox.setAlignment(Pos.CENTER);
-        mainVBox.setPadding(new Insets(10));
-         
-        Scene scene = new Scene(mainVBox,650,800);
-        stage.setScene(scene);
-        stage.setTitle("Guessing Game");
-        stage.show();   }
-
-
-  
-  class PlayHandler implements EventHandler<ActionEvent> {
-      
-      @Override
-      public void handle(ActionEvent event)
-      {
-                  
-         RadioButton selectedRadioButton = (RadioButton) radioGroup.getSelectedToggle();
-
-         if(selectedRadioButton.equals(radioButtons[0])){
-            sizeChoice = 2; }
-            
-         else if(selectedRadioButton.equals(radioButtons[1])){
-            sizeChoice = 4; }
-            
-         else {
-            sizeChoice = 6; }
-               
-      imagesGrid=images();
       
       reset.setFont(Font.font("League Spartan",20));
       reset.setTextFill(Color.web("#381E22"));
@@ -156,8 +104,8 @@ public class GuessingGameSizeChoice extends Application {
       
       
       
-      for (int r=0;r<4;r++){ 
-         for (int c=0;c<4;c++){
+      for (int r=0;r<sizeChoice;r++){ 
+         for (int c=0;c<sizeChoice;c++){
             allBlanks[r][c] = makeBlank();
             grid.add(allBlanks[r][c],c,r);
             allBlanks[r][c].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
@@ -166,24 +114,25 @@ public class GuessingGameSizeChoice extends Application {
       }
       
       
-      VBox vbox = new VBox(grid,reset,turnCnt);
+      VBox vbox = new VBox(header,grid,reset,turnCnt);
       vbox.setAlignment(Pos.CENTER);
       vbox.setStyle("-fx-background-color: #BECADD");
       
-      HBox hbox = new HBox(p1Score,vbox,p2Score);
+      VBox lvbox = new VBox(p1Score,radioButtons[0], radioButtons[1],radioButtons[2]);
+      
+      HBox hbox = new HBox(lvbox,vbox,p2Score);
       hbox.setStyle("-fx-background-color: #BECADD");
       vbox.setAlignment(Pos.CENTER);
 
-      VBox vbox5000 = new VBox(header,hbox);
-        Scene scene2 = new Scene(vbox5000);
-        stage.setScene(scene2);
-        stage.setTitle("Guessing Game");
-        stage.show();   }
+      
+      Scene scene = new Scene(hbox); 
+      stage.setScene(scene);
+      stage.setTitle("Guessing Game"); 
+      stage.show(); 
       
 
    }
    
-            
              
             
       Button makeBlank(){
@@ -200,13 +149,13 @@ public class GuessingGameSizeChoice extends Application {
       ImageView[][] images(){
          
          int num = 0;
-           for (int i=1;i<9;i++){
+           for (int i=1;i<sizeChoice*2+1;i++){
                images[i-1] = new ImageView(i+".jpeg");
                images[i-1].setFitWidth(130); 
                images[i-1].setFitHeight(130);
                }
                
-           for (int i=1;i<9;i++){
+           for (int i=1;i<sizeChoice*2+1;i++){
                images[i+7] = new ImageView(i+".jpeg");
                images[i+7] .setFitWidth(130); 
                images[i+7] .setFitHeight(130);
@@ -216,8 +165,8 @@ public class GuessingGameSizeChoice extends Application {
          //***for i<8:  make the 8 a variable that can change based on the size of the grid (for A-Code) â€“â€“ sizechoice!!***
             
 
-         for (int r=0;r<4;r++){ 
-            for (int c=0;c<4;c++){
+         for (int r=0;r<sizeChoice;r++){ 
+            for (int c=0;c<sizeChoice;c++){
             imagesGrid[r][c] = shuffled[num];
             num = num + 1;}
          
@@ -230,21 +179,21 @@ public class GuessingGameSizeChoice extends Application {
    
       ArrayList<Integer> iHateJava = new ArrayList<Integer>();
       
-      int[] random = new int[16];
+      int[] random = new int[sizeChoice*sizeChoice];
       
-      for(int i = 0;i<16;i++){
+      for(int i = 0;i<sizeChoice*sizeChoice;i++){
          iHateJava.add(new Integer(i)); }
          
       Collections.shuffle(iHateJava);
       //System.out.println(iHateJava);
       
-      for(int j = 0;j<16;j++){
+      for(int j = 0;j<sizeChoice*sizeChoice;j++){
          int num = iHateJava.get(j);
          shuffled[j] = images[num]; 
       
          System.out.print(shuffled[j]); }
          
-      for(int x = 0;x<16;x++){
+      for(int x = 0;x<sizeChoice*sizeChoice;x++){
          int num = iHateJava.get(x);
          random[x] = num; }
          
@@ -257,10 +206,23 @@ public class GuessingGameSizeChoice extends Application {
       @Override
       
       public void handle(ActionEvent event) {
+      
+         RadioButton selectedRadioButton = (RadioButton) radioGroup.getSelectedToggle();
+
+         if(selectedRadioButton.equals(radioButtons[0])){
+            sizeChoice = 2; }
+            
+         else if(selectedRadioButton.equals(radioButtons[1])){
+            sizeChoice = 4; }
+            
+         else {
+            sizeChoice = 6; }
+      gg.setSizeChoice(sizeChoice);
+            
       turn=1;
       imagesGrid=images();
-      for (int r=0;r<4;r++){ 
-         for (int c=0;c<4;c++){
+      for (int r=0;r<sizeChoice;r++){ 
+         for (int c=0;c<sizeChoice;c++){
             allBlanks[r][c] = makeBlank();
             grid.add(allBlanks[r][c],c,r);
             allBlanks[r][c].setStyle("-fx-background-color: #DEE5F2;-fx-background-radius: 0");
@@ -298,8 +260,8 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
             round++;
             gg.setRound(round);}
         else{
-         for(int r=0;r<4;r++){
-            for(int c=0;c<4;c++){
+         for(int r=0;r<sizeChoice;r++){
+            for(int c=0;c<sizeChoice;c++){
                if(event.getSource().equals(allBlanks[r][c])){
                   allBlanks[r][c]= new Button("",imagesGrid[r][c]);
                   grid.add(allBlanks[r][c],c,r);
@@ -323,6 +285,3 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
                   }
                   
                   }
-
-
-
