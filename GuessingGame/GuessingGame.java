@@ -203,26 +203,8 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
       @Override
       public void handle(ActionEvent event)
       {
-      if( gg.isWinner()){
-        if(gg.getPlayer()==2){
-               score2=score2+1;
-               gg.setP2(score2);
-               p2Score.setText("Player 2 : "+score2);}
-            else{
-               score1=score1+1;
-               gg.setP1(score1);
-               p1Score.setText("   Player 1 : "+score1);}
-         if(score2==score1){
-             turnCnt.setText("end game, tie");}
-         else{ if(score2<score1){
-             turnCnt.setText("game over, player 1 won");}
-         else{ if(score2>score1){
-             turnCnt.setText("game over, player 2 won");}}
-             }}
-         else{
       //status.setText(gg.gameOverStatus());
       if(turn==3){
-         gg.setChoice(guess);
          if(gg.isMatch()){
             if(gg.getPlayer()==2){
                score2=score2+1;
@@ -257,16 +239,29 @@ class ButtonClickHandler implements EventHandler<ActionEvent>
                if (turn==2){
                   guess[2]=r;
                   guess[3]=c;
+                  gg.setChoice(guess);
+                  gg.isMatch();
+                  if(gg.isWinner()){
+                     if(gg.getPlayer()==2){
+                        score2=score2+1;
+                        gg.setP2(score2);
+                        p2Score.setText("Player 2 : "+score2);}
+                     else{
+                        score1=score1+1;
+                        gg.setP1(score1);
+                        p1Score.setText("   Player 1 : "+score1);}
+                  if(score2==score1){
+                     turnCnt.setText("end game, tie");}
+                  else{ if(score2<score1){
+                     turnCnt.setText("game over, player 1 won");}
+                  else{ if(score2>score1){
+                     turnCnt.setText("game over, player 2 won");}}}}
+                  else{
                   if (gg.getPlayer()==1){
                      player=2;}
                   if(gg.getPlayer()==2){
                      player=1;}
-                  turnCnt.setText("Player "+player+" click twice to chooes another picture");}}}}}
+                  turnCnt.setText("Player "+player+" click twice to chooes another picture");}}}}}}
                   
                turn++;
             }
-                  
-             }
-                  }
-                  
-                  }
