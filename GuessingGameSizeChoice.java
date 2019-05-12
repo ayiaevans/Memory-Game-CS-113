@@ -1,6 +1,4 @@
-//It runs, but when you click play it just gives a lot of green vomit (one of them's a null exception ¯\_(ツ)_/¯)
-
-
+//I got new green vomit ¯\_(ツ)_/¯
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.application.Application;
@@ -127,9 +125,7 @@ public class GuessingGameSizeChoice extends Application {
             
          else {
             sizeChoice = 6; }
-         
-      changeable.getChildren().remove(radioVBoxWt);
-      
+               
       imagesGrid=images();
       
       reset.setFont(Font.font("League Spartan",20));
@@ -178,13 +174,16 @@ public class GuessingGameSizeChoice extends Application {
       hbox.setStyle("-fx-background-color: #BECADD");
       vbox.setAlignment(Pos.CENTER);
 
-      
-      changeable.getChildren().addAll(hbox);
+      VBox vbox5000 = new VBox(header,hbox);
+        Scene scene2 = new Scene(vbox5000);
+        stage.setScene(scene2);
+        stage.setTitle("Guessing Game");
+        stage.show();   }
       
 
    }
    
-            }
+            
              
             
       Button makeBlank(){
